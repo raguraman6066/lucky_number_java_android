@@ -20,36 +20,42 @@ Button share_btn;
         welcomeText=findViewById(R.id.tv1);
         luckynumberText=findViewById(R.id.tv2);
         share_btn=findViewById(R.id.share_btn);
-//get data
+       //get data from intent - getIntent()
         Intent intent=getIntent();
-        String userName=intent.getStringExtra("name");
-        //number
-     int random_num=generateRandomNumber();
-     luckynumberText.setText(""+random_num);
-     share_btn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        shareData(userName,random_num);
-    }
-});
+        String userName=intent.getStringExtra("name");//getStringExtra()
+        //get random number and set
+        int random_num=generateRandomNumber();
+        luckynumberText.setText(""+random_num);
+
+
+        //share the number
+        share_btn.setOnClickListener(new View.OnClickListener() {
+        @Override
+         public void onClick(View v) {
+           shareData(userName,random_num);
+           }
+        });
 
 
     }
+
+    //share intent
 
     public void shareData(String userName,int randomNumber){
-        Intent i=new Intent(Intent.ACTION_SEND);//share content to other apps
-        i.setType("text/plain");
-        i.putExtra(Intent.EXTRA_SUBJECT,userName+" got lucky today");
+        //implicit  intent
+        Intent i=new Intent(Intent.ACTION_SEND);//share content to other apps on the device
+        i.setType("text/plain");//we sharing text data
+        i.putExtra(Intent.EXTRA_SUBJECT,userName+" got lucky today");//extra contents //subject-using in email
         i.putExtra(Intent.EXTRA_TEXT,"His lucky number is: "+randomNumber);
         startActivity(Intent.createChooser(i,"Choose a platform"));
     }
 
 
     public int generateRandomNumber(){
+        //random class
         Random random=new Random();
         int upper_limit=1000;
         int randomNumberGenerated=random.nextInt(upper_limit);
         return randomNumberGenerated;
-
     }
 }

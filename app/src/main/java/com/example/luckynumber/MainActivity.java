@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-EditText editText;
-TextView textView;
-Button button;
+    EditText editText;
+    TextView textView;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +20,15 @@ Button button;
         button=findViewById(R.id.btn);
         editText=findViewById(R.id.edit_text);
         textView=findViewById(R.id.textView);
-button.setOnClickListener(new View.OnClickListener() {
+    button.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String name=editText.getText().toString();
         Intent intent=new Intent(getApplicationContext(), SecondActivity.class);
-        intent.putExtra("name",name);
+        //add extra data to next page
+        intent.putExtra("name",name);//putExtra()
         startActivity(intent);
-    }
-});
+         }
+       });
     }
 }
